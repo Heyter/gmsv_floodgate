@@ -22,7 +22,7 @@ static SpewOutputFunc_t oldSpewFunc;
 static uint32_t gThread;
 static uint32_t iFloodGateLimit = 100000;
 
-static SpewRetval_t spewHandler(SpewType_t spewType, const char *msg) {
+SpewRetval_t spewHandler(SpewType_t spewType, const char *msg) {
 
 	#if defined _WIN32
 		if (GetCurrentThreadId() != gThread)
