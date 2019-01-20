@@ -18,16 +18,13 @@
 using namespace GarrysMod::Lua;
 
 static SpewOutputFunc_t oldSpewFunc;
-
-static uint32_t gThread;
-static uint32_t iFloodGateLimit = 100000;
+static uint32_t gThread, iFloodGateLimit = 100000;
 
 SpewRetval_t spewHandler(SpewType_t spewType, const char *msg) {
-
-	#if defined _WIN32
+	#ifdef _WIN32
 		if (GetCurrentThreadId() != gThread)
 			return SPEW_CONTINUE;
-	#elif defined __linux || defined __APPLE__
+	#else
 		if (getpid() != gThread)
 			return SPEW_CONTINUE;
 	#endif
